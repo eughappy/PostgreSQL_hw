@@ -1,0 +1,55 @@
+
+select * from tasks where user_id = 76;
+
+select * from tasks 
+where status_id in (select id from status where name = 'new');
+
+UPDATE tasks
+SET status_id = 7
+WHERE id = 67;
+
+select fullname from users 
+where id not in (select user_id from tasks);
+
+
+INSERT INTO tasks(title,description,status_id,user_id) 
+VALUES('Task14','new_task_for_user_14','5','14');
+
+
+select * from tasks
+where status_id in (select id from status where name != 'completed');
+
+
+delete from tasks 
+where id = 1;
+
+
+select fullname from users
+where email like '%4%';
+
+
+update users 
+set fullname = 'Eugene'
+where id = 2;
+
+select count(status_id) as total_counts, status_id from tasks
+group by status_id;
+
+
+select t.title from tasks as t
+inner join users as u on t.user_id  = u.id 
+where u.email like '%gmail%';
+
+
+select title from tasks
+where description is null;
+
+
+select t.title, u.fullname  from tasks as t
+inner join users as u on t.user_id  = u.id 
+where t.status_id in (select s.id from status as s where s.name = 'in progress');
+
+
+select count(t.user_id) as total_tasks, u.fullname  from tasks as t
+left join users as u on t.user_id  = u.id
+group by u.fullname;
