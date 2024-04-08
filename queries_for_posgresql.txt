@@ -42,7 +42,8 @@ where u.email like '%gmail%';
 
 
 select title from tasks
-where description is null;
+where description = 'None'
+or description = '';
 
 
 select t.title, u.fullname  from tasks as t
@@ -50,6 +51,6 @@ inner join users as u on t.user_id  = u.id
 where t.status_id in (select s.id from status as s where s.name = 'in progress');
 
 
-select count(t.user_id) as total_tasks, u.fullname  from tasks as t
+select count(t.user_id) as total_tasks, u.email  from tasks as t
 left join users as u on t.user_id  = u.id
-group by u.fullname;
+group by u.email;
